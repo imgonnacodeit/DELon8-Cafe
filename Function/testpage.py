@@ -34,7 +34,7 @@ def test_createNew_caps(mock_input):
     assert mock_input.call_count == 1
 
 
-#Making sure that the patch cannot be empty
+#Making sure that the input cannot be empty
 @patch('builtins.input')
 def test_createNew_none(mock_input):
     mock_input.return_value = ''
@@ -47,7 +47,7 @@ def test_createNew_none(mock_input):
 #Making sure that the inputs are a string. 
 @patch('builtins.input')
 def test_createNew_string(mock_input):
-    mock_input.return_value = 'coke'
+    mock_input.return_value = 'cOke'
 
     result = codetest.createNew()
 
