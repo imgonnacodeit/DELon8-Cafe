@@ -54,7 +54,7 @@ while selection == 0 :
    
     if choice == 1:
         while True:
-            print ('\n \n \n PRODUCTS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all products\n2. To CREATE a new product\n3. To UPDATE a product\n4. To DELETE a product\n\n\n')
+            print ('\nPRODUCTS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all products\n2. To CREATE a new product\n3. To UPDATE a product\n4. To DELETE a product\n\n\n')
             #Taking an input for the products menu
             product_menu_choice = int(input(''))
 
@@ -65,7 +65,7 @@ while selection == 0 :
             #Takes everyproduct and prints it to a new line.
             if product_menu_choice == 1:
                 codetest.PRODUCT_print()
-
+                
             #Creating new items in the list. 
             elif product_menu_choice == 2:
                 x = codetest.PRODUCT_dic()

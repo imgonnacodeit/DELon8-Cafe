@@ -1,5 +1,6 @@
 import codetest
 import requests
+import requests_mock
 from unittest.mock import Mock
 from unittest.mock import patch
 
@@ -70,12 +71,11 @@ def test_PRODUCT_createPrice_integer(mock_input):
 
 #Inserting a string
 @patch('builtins.input')
-def test_PRODUCT_createPrice_string(mock_input):
-    mock_input.return_value = 'fantastic'
+def test_PRODUCT_createPrice_string(requests_mock, capsys):
+    requests_mock.get('fantastic')
     result = codetest.PRODUCT_createPrice()
-    assert (result == 'This is not a number please start again.')
-    assert mock_input.call_count == 1
-
+    stdout, stderr = capsys.readouterr()
+    assert stdout == 'This is not a number please start again.'   
 
 
 

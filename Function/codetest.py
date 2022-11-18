@@ -14,8 +14,9 @@ def createNew():
         return new_addition
 
 def PRODUCT_createPrice():
+    new_price = input('What is the price of the item?: ')
     try:
-        new_price = float(input('What is the price of the item?: '))
+        new_price = float(new_price)
         return new_price
     except:
         print('This is not a number please start again.')
