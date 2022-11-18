@@ -50,22 +50,11 @@ while selection == 0 :
         courierFile.write('\n'.join(courier))
         courierFile.close()
 
-
         break
-
    
     if choice == 1:
         while True:
-            print ('')
-            print ('')
-            print ('PRODUCTS MENU')
-            print ('0. Return to the MAIN MENU.')
-            print ('1. To PRINT all products')
-            print ('2. To CREATE a new product') 
-            print ('3. To UPDATE a product')
-            print ('4. To DELETE a product')
-            print('')
-            
+            print ('\n \n \n PRODUCTS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all products\n2. To CREATE a new product\n3. To UPDATE a product\n4. To DELETE a product\n\n\n')
             #Taking an input for the products menu
             product_menu_choice = int(input(''))
 
@@ -73,24 +62,18 @@ while selection == 0 :
             if product_menu_choice == 0:
                 break
 
-
             #Takes everyproduct and prints it to a new line.
             if product_menu_choice == 1:
                 codetest.PRODUCT_print()
-
 
             #Creating new items in the list. 
             elif product_menu_choice == 2:
                 x = codetest.PRODUCT_dic()
                 codetest.PRODUCT_add(x)
                 
-
-
             #This updates the product list 
             elif product_menu_choice == 3:
                 codetest.PRODUCT_update()
-
-
 
             #This will delete something from the list using the index number.
             elif product_menu_choice == 4:

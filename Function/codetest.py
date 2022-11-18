@@ -4,7 +4,7 @@ courierlist = []
 
 
 def createNew():
-    new_addition = input('Please enter the name: ')
+    new_addition = input('Please enter the new thing that you need.')
     new_addition = new_addition.lower()
     if new_addition == '':
         print('You cannot have an empty value.')
@@ -21,6 +21,7 @@ def PRODUCT_dic():
 
 def PRODUCT_add(x):
     productlist.append(x)
+    return(productlist)
 
 def PRODUCT_print():
     index = 0
@@ -47,16 +48,3 @@ def PRODUCT_delete():
     del productlist[item_finder]
     print ('Your item has been deleted.')
     PRODUCT_print()
-
-
-
-
-
-
-# def COURIER_createPhone_number():
-#     new_number = int(input('What is the price of the item? '))
-#     return new_number
-
-# def COURIER_dic():
-#     dic = {'name': createNew(), 'phone number': COURIER_createPhone_number()}
-#     return dic
