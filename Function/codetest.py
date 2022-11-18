@@ -7,13 +7,19 @@ def createNew():
     new_addition = input('Please enter the new thing that you need.')
     new_addition = new_addition.lower()
     if new_addition == '':
-        print('You cannot have an empty value.')
+        error = ('You cannot have an empty value.')
+        print(error)
+        return error
     else:
         return new_addition
 
 def PRODUCT_createPrice():
-    new_price = int(input('What is the price of the item?: '))
-    return new_price
+    try:
+        new_price = float(input('What is the price of the item?: '))
+        return new_price
+    except:
+        print('This is not a number please start again.')
+   
 
 def PRODUCT_dic():
     diction = {'name': createNew(), 'price': PRODUCT_createPrice()}
