@@ -1,3 +1,4 @@
+import codetest
 #Creating a new item
 def createNew():
     new_addition = input('')
@@ -6,12 +7,13 @@ def createNew():
         print('You cannot have an empty value.')
     else:
         return new_addition
+    
 
 
 #LOAD products list from products.txt
 productsFile = open('products.txt', 'r')
 productsLine = productsFile.readlines()
-products = []
+products = {}
 for p_line in productsLine:
     p_line = p_line.strip()
     products.append(p_line)
@@ -85,18 +87,12 @@ while selection == 0 :
             
             #Takes everyproduct and prints it to a new line.
             if product_menu_choice == 1:
-                print(products) #rename this pring products list
-
+                print(products)
             
             #Creating new items in the list. 
             elif product_menu_choice == 2:
-
-                #Code here verifys the correct spelling and puts everything into a lower case format.
-                print('Please enter the name of the product that you would like to add.')
-                newitem = createNew()
-                products.append(newitem)
+                codetest.PRODUCT_add_to_list()
                     
-
             #This updates the product list 
             elif product_menu_choice == 3:
 
@@ -151,13 +147,8 @@ while selection == 0 :
             
             #Creating new items in the list. 
             elif courier_menu_choice == 2:
-
-                #Code here verifys the correct spelling and puts everything into a lower case format.
-                print('Please enter the name of the courier that you would like to add.')
-                newcourier = createNew()
-                courier.append(newcourier)
-                    
-
+                codetest.COURIER_add_to_list()
+                
             #This updates the product list 
             elif courier_menu_choice == 3:
 
@@ -241,18 +232,24 @@ while selection == 0 :
                 
                 print(orders)
 
-            # #This is to update the existing orders
-            # elif orders_menu_choice == 4:
-            #     order_number = 0
-            #     for i in orders:
-            #         print (order_number, ':', i)
-            #         order_number = order_number + 1
+            #This is to update the existing orders
+            elif orders_menu_choice == 4:
+                order_number = 0
+                for i in orders:
+                    print (order_number, ':', i)
+                    order_number = order_number + 1
+                choice = int(input('Which order would you like to update? '))
+                print('You have chosen: ')
+                print(orders[choice])
+                second_choice = int(input('Which value would you like to change: '))
+                change = input('What would you like to change it to?: ')
+                orders[choice][second_choice] = change
                 
-            #     orders_updates = ('Name', 'Address', 'Phone Number')
-            #     updated_order = int(input('Which one of the inputs would you like to change? '))
+                print(orders[choice])
+
                 
-            #     for key, value in orders[updated_order]:
-            #         print (key, value)
+            
+                
                 
             
             #This is deleting an entire order from the orders menu

@@ -1,4 +1,5 @@
 import codetest
+import project
 from unittest.mock import Mock
 from unittest.mock import patch
 
@@ -63,6 +64,13 @@ testing for it as it is called in a single line.'''
 #TEST TO VIEW ALL PRODUCTS
 #******************************************
 '''This can be done in a nicer way later but it is not a core requirment at this stage'''
+
+
+#TDD-TEST TO WRITE CODE TO UPDATE THE ORDER VALUES
+#1. Print the orders list with index values.
+def test_update_order():
+    pass
+
 
 
 
