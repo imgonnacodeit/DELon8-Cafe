@@ -32,10 +32,15 @@ def PRODUCT_add(x):
     productlist.append(x)
     return(productlist)
 
-def PRODUCT_update():
-    pass     
+def PRODUCT_update(w, x, y, z):
+    z[w][x] = y
+    return z
 
 def PRODUCT_delete(z):
-    item_finder = int(input('Insert the item number that you would like to delete: '))
-    del z[item_finder]
-    print (z)
+    item_finder = input('Insert the item number that you would like to delete: ')
+    try:
+        item_finder = int(item_finder)
+        del z[item_finder]
+        return z
+    except:
+        print('You did not enter a correct value')

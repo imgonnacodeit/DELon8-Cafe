@@ -15,11 +15,14 @@ import pytest
 #Assert - Write an assertion so that it can fail then pass.
 
 #WEEK 1: REQUIRED TESTS
+'''I will still need to add restraints in the code for the menu
+and other things such as only two decimal places for the money and the restains 
+for the input on the menu'''
 #create a product - DONE
 #add product to list - DONE
 #view all products - DONE
-#update a product - 
-#delete a product - 
+#update a product - DONE
+#delete a product - DONE
 
 # TESTS CREATE NEW
 #***********************************************
@@ -125,18 +128,32 @@ def test_PRODUCT_print_happy_case(capsys):
 
 
 #TEST TO UPDATE PRODUCTS
-def test_update_happy():
-    pass
+#***********************
+def test_update_happy_name():
+    a = 1
+    b = 'name'
+    c = 'cake'
+    d = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
+    expected = [{'name': 'apple', 'price': 0.65}, {'name': 'cake', 'price': 2.54}]
+    actual = codetest.PRODUCT_update(a, b, c, d)
+    assert expected == actual
 
 #TEST TO DELETE PRODUCTS
 #**************************
-#Cannot delete a number that is not there 
 #Delete the item
-
 @patch('builtins.input')
 def test_PRODUCT_delete_happy(mock_input, capsys):
     mock_input.return_value = 0
     list = [{'name': 'apple', 'price': 0.65}, {'name': 'berries', 'price': 1.05}]
+    actual = codetest.PRODUCT_delete(list)
+    result = [{'name': 'berries', 'price': 1.05}]
+    assert actual == result
+
+#Cannot delete if a string is put in
+@patch('builtins.input')
+def test_PRODUCT_delete_unhappy_string(mock_input, capsys):
+    mock_input.return_value = 'between'
+    list = [{'name': 'apple', 'price': 0.65}, {'name': 'berries', 'price': 1.05}]
     codetest.PRODUCT_delete(list)
     stdout, stderr = capsys.readouterr()
-    assert stdout == "[{'name': 'berries', 'price': 1.05}]\n"
+    assert stdout == 'You did not enter a correct value\n'
