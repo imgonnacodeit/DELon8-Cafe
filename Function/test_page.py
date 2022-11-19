@@ -3,13 +3,29 @@ import requests
 import requests_mock
 from unittest.mock import Mock
 from unittest.mock import patch
+import pytest
+#Types of tests
+#COMMON CASE - Normal operating parameters
+#EDGE CASE - Occurs at the extreme values
+#CORNER CASE - Occurs outside of normal parameters
 
+#How to create a test.
+#Assemble - Arrange what I am going to test
+#Act - Call the function with the parameters 
+#Assert - Write an assertion so that it can fail then pass.
+
+#WEEK 1: REQUIRED TESTS
+#create a product - DONE
+#add product to list - DONE
+#view all products - DONE
+#update a product - 
+#delete a product - 
 
 # TESTS CREATE NEW
 #***********************************************
-#Checking if my input patch works.
+# Checking if my input patch works in the pytest.
 @patch('builtins.input')
-def test_createNew(mock_input):
+def test_createNew_happy(mock_input):
     mock_input.return_value = 'fanta'
     result = codetest.createNew()
     assert(result == 'fanta')
@@ -17,85 +33,110 @@ def test_createNew(mock_input):
 
 # Checking the patch works with capital letters. 
 @patch('builtins.input')
-def test_createNew_caps(mock_input):
+def test_createNew_happy_caps(mock_input):
     mock_input.return_value = 'ceREAl'
-
     result = codetest.createNew()
-
     assert(result == 'cereal')
     assert mock_input.call_count == 1
 
-
-#Making sure that the input cannot be empty
-@patch('builtins.input')
-def test_createNew_none(mock_input):
-    mock_input.return_value = ''
-    result = codetest.createNew()
-    assert result == 'You cannot have an empty value.'
-    assert mock_input.call_count == 1
-
-#Making sure that the inputs are a string. 
+#Making sure that the inputs are in a string format. 
 @patch('builtins.input')
 def test_createNew_string(mock_input):
     mock_input.return_value = 'cOke'
-
     result = codetest.createNew()
-
     assert (isinstance(result, str))
     assert mock_input.call_count == 1
-
-# # capture something printed to screen
-# def test_print_things(capsys):
-#     stdout, stderr = capsys.readouterr()
-#     assert stdout == 'hi\n'
 
 
 
 # CREATE PRICE
 #*********************************************
-#Inserting an integer
+# Checking to see if function would take an integer 
 @patch('builtins.input')
-def test_PRODUCT_createPrice_integer(mock_input):
-    mock_input.return_value = 2
+def test_createPrice_happy_integer_input(mock_input):
+    mock_input.return_value = 10
     result = codetest.PRODUCT_createPrice()
-    assert (result == 2)
-    assert mock_input.call_count == 1
+    assert result == 10
 
-#Inserting a float
+#Checking to see if it would take a float as an input
 @patch('builtins.input')
-def test_PRODUCT_createPrice_integer(mock_input):
-    mock_input.return_value = 2.56
+def test_createPrice_happy_floating_input(mock_input):
+    mock_input.return_value = 54.23
     result = codetest.PRODUCT_createPrice()
-    assert (result == 2.56)
-    assert mock_input.call_count == 1
+    assert result == 54.23
 
-#Inserting a string
+#Checking to see if it would take a float as an input
 @patch('builtins.input')
-def test_PRODUCT_createPrice_string(requests_mock, capsys):
-    requests_mock.get('fantastic')
+def test_createPrice_happy_edge_case(mock_input):
+    mock_input.return_value = 546544.24646546546543
     result = codetest.PRODUCT_createPrice()
+    assert result == 546544.24646546546543
+
+
+#Should output a floating number type.
+@patch('builtins.input')
+def test_createPrice_happy_type(mock_input):
+    mock_input.return_value = 54.23
+    result = codetest.PRODUCT_createPrice()
+    assert isinstance(result, float)
+
+
+#Should not accept a string and raise and error. 
+#This test passed until I coded the exception. 
+@pytest.mark.skip(reason ='This has been handled by the exception below')
+@patch('builtins.input')
+def test_createPrice_unhappy_type(mock_input):
+    with pytest.raises(ValueError):
+        mock_input.return_value = 'fancy'
+        result = codetest.PRODUCT_createPrice()
+
+
+#Should pass through the exception block
+@patch('builtins.input')
+def test_createPrice_unhappy_type_exception(mock_input, capsys):
+    mock_input.return_value = 'flirt'
+    codetest.PRODUCT_createPrice()
     stdout, stderr = capsys.readouterr()
-    assert stdout == 'This is not a number please start again.'   
+    assert stdout == 'This entry is not valid please start again\n'
+
+
+#TEST TO ADD SOMETHING TO A LIST
+#This was the only test required as the dependencies have also been tested.
+#*******************************************
+def test_PRODUCT_add_happy_case():
+    expected = [{'name': 'apple', 'price': 0.65}]
+    diction = {'name': 'apple', 'price': 0.65}
+    actual = codetest.PRODUCT_add(diction)
+    assert actual == expected
 
 
 
+#TEST TO VIEW ALL THE PRODUCTS 
+#The test shows that the products inserted are printed to the console 
+#*******************************************
+def test_PRODUCT_print_happy_case(capsys):
+    expected = '0: name apple price 0.65\n'
+    x = 'name'
+    y = 'price'
+    z = [{'name': 'apple', 'price': 0.65}]
+    actual = codetest.PRODUCT_print(x, y, z)
+    stdout, stderr = capsys.readouterr()
+    assert stdout == expected
 
 
+#TEST TO UPDATE PRODUCTS
+def test_update_happy():
+    pass
 
+#TEST TO DELETE PRODUCTS
+#**************************
+#Cannot delete a number that is not there 
+#Delete the item
 
-
-
-# #TEST TO ADD SOMETHING TO A LIST
-# #*******************************************
-# '''The append functoin is called here and therefore does not need
-# testing for it as it is called in a single line.'''
-
-# #TEST TO VIEW ALL PRODUCTS
-# #******************************************
-# '''This can be done in a nicer way later but it is not a core requirment at this stage'''
-
-
-# #TDD-TEST TO WRITE CODE TO UPDATE THE ORDER VALUES
-# #1. Print the orders list with index values.
-# def test_update_order():
-#     pass
+@patch('builtins.input')
+def test_PRODUCT_delete_happy(mock_input, capsys):
+    mock_input.return_value = 0
+    list = [{'name': 'apple', 'price': 0.65}, {'name': 'berries', 'price': 1.05}]
+    codetest.PRODUCT_delete(list)
+    stdout, stderr = capsys.readouterr()
+    assert stdout == "[{'name': 'berries', 'price': 1.05}]\n"

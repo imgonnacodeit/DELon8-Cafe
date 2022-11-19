@@ -1,62 +1,16 @@
 import codetest
-#LOAD products list from products.txt
-# productsFile = open('products.txt', 'r')
-# productsLine = productsFile.readlines()
-# products = []
-# for p_line in productsLine:
-#     p_line = p_line.strip()
-#     products.append(p_line)
-
-
-#LOAD couriers list from couriers.txt
-courierFile = open('couriers.txt', 'r')
-courierLine = courierFile.readlines()
-courier = []
-for c_line in courierLine:
-    c_line = c_line.strip()
-    courier.append(c_line)
-
-#     The above can be replace with a functions to not be repeating 
-
-# An empty list to append the orders
-orders = []
-
-
-selection = 0
     
 #Printing the main menu
-#Put the below on one line 
 print('Welcome to the main menu')
-while selection == 0 :
-    print('')
-    print('MENU')
-    print('To EXIT the program select 0')
-    print('To enter the PRODUCTS MENU select 1')
-    print('To enter the ORDERS MENU select 2')
-    print('To enter the COURIERS MENU select 3')
-    
-
-    #Get the choice from the main menu
-
-    #Save everything for both files and then exit the APP
-    print('')
-    choice = (int(input('What is your choice: ')))
-    if choice == 0:
-        productsFile = open('products.txt', 'w')
-        productsFile.write('\n'.join(codetest.productlist))
-        productsFile.close()
-
-        courierFile = open('couriers.txt', 'w')
-        courierFile.write('\n'.join(courier))
-        courierFile.close()
-
-        break
-   
+while True:
+    choice = int(input('\n MENU\nTo EXIT the program select 0\nTo enter the PRODUCTS MENU select 1\nTo enter the ORDERS MENU select 2\nTo enter the COURIERS MENU select 3\n\nPlease enter selection: '))
     if choice == 1:
+        x = 'name'
+        y = 'price'
+        z = codetest.productlist
         while True:
-            print ('\nPRODUCTS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all products\n2. To CREATE a new product\n3. To UPDATE a product\n4. To DELETE a product\n\n\n')
             #Taking an input for the products menu
-            product_menu_choice = int(input(''))
+            product_menu_choice = int(input('\nPRODUCTS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all products\n2. To CREATE a new product\n3. To UPDATE a product\n4. To DELETE a product\n\nPlease enter selection: '))
 
             #Exit out of the product menu
             if product_menu_choice == 0:
@@ -64,17 +18,19 @@ while selection == 0 :
 
             #Takes everyproduct and prints it to a new line.
             if product_menu_choice == 1:
-                codetest.PRODUCT_print()
+                codetest.PRODUCT_print(x, y, z)
                 
             #Creating new items in the list. 
             elif product_menu_choice == 2:
-                x = codetest.PRODUCT_dic()
-                codetest.PRODUCT_add(x)
+                create_new = codetest.PRODUCT_dic()
+                codetest.PRODUCT_add(create_new)
                 
             #This updates the product list 
             elif product_menu_choice == 3:
-                codetest.PRODUCT_update()
+                codetest.PRODUCT_print(x, y, z)
 
             #This will delete something from the list using the index number.
             elif product_menu_choice == 4:
-                codetest.PRODUCT_delete()
+                codetest.PRODUCT_print(x, y, z)
+                codetest.PRODUCT_delete(z)
+                codetest.PRODUCT_print(x, y, z)

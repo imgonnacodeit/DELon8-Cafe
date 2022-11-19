@@ -138,3 +138,48 @@
 
                 deletingorder = int(input('Which order would you like to delete? '))
                 del orders[deletingorder]
+
+
+
+#LOAD products list from products.txt
+# productsFile = open('products.txt', 'r')
+# productsLine = productsFile.readlines()
+# products = []
+# for p_line in productsLine:
+#     p_line = p_line.strip()
+#     products.append(p_line)
+
+
+#LOAD couriers list from couriers.txt
+courierFile = open('couriers.txt', 'r')
+courierLine = courierFile.readlines()
+courier = []
+for c_line in courierLine:
+    c_line = c_line.strip()
+    courier.append(c_line)
+
+#     The above can be replace with a functions to not be repeating 
+
+# An empty list to append the orders
+orders = []
+
+
+
+
+
+    #Get the choice from the main menu
+
+    #Save everything for both files and then exit the APP
+    print('')
+    choice = (int(input('What is your choice: ')))
+    if choice == 0:
+        productsFile = open('products.txt', 'w')
+        productsFile.write('\n'.join(codetest.productlist))
+        productsFile.close()
+
+        courierFile = open('couriers.txt', 'w')
+        courierFile.write('\n'.join(courier))
+        courierFile.close()
+
+        break
+   
