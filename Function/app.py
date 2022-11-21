@@ -16,57 +16,60 @@ while True:
 
             #Takes everyproduct and prints it to a new line.
             if product_menu_choice == 1:
-                codetest.PRODUCT_printing(x, y, z)
+                codetest.printing(x, y, z)
                 
             #Creating new items in the list. 
             elif product_menu_choice == 2:
-                create_new = codetest.PRODUCT_dic()
+                create_new = codetest.PRODUCT_making_dic()
                 codetest.add(create_new, z)
                 
             #This updates the product list 
             elif product_menu_choice == 3:
-                codetest.PRODUCT_printing(x, y, z)
+                codetest.printing(x, y, z)
                 choice = int(input('Which number would you like to choose'))
-                select = input('Would you like to change the name or the price')
+                select = input(f'Would you like to change the {x} or the {y}')
                 update = input('What would you like to change it to.')
-                codetest.PRODUCT_update(choice, select, update, z)
-                codetest.PRODUCT_printing(x, y, z)
+                codetest.update(choice, select, update, z)
+                codetest.printing(x, y, z)
 
             #This will delete something from the list using the index number.
             elif product_menu_choice == 4:
-                codetest.PRODUCT_printing(x, y, z)
+                codetest.printing(x, y, z)
                 codetest.delete(z)
-                codetest.PRODUCT_printing(x, y, z)
-    
-    elif choice == 2:
-        z = codetest.courierlist
+                codetest.printing(x, y, z)
+
+    if choice == 1:
+        x = 'name'
+        y = 'price'
+        z = codetest.productlist
         while True:
             #Taking an input for the products menu
-            courier_menu_choice = int(input('\nCOURIERS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all couriers\n2. To CREATE a new courier\n3. To UPDATE a courier\n4. To DELETE a courier\n\nPlease enter selection: '))
+            product_menu_choice = int(input('\nPRODUCTS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all products\n2. To CREATE a new product\n3. To UPDATE a product\n4. To DELETE a product\n\nPlease enter selection: '))
 
             #Exit out of the product menu
-            if courier_menu_choice == 0:
+            if product_menu_choice == 0:
                 break
 
             #Takes everyproduct and prints it to a new line.
-            if courier_menu_choice == 1:
-                codetest.COURIER_printing(z)
+            if product_menu_choice == 1:
+                codetest.printing(x, y, z)
                 
             #Creating new items in the list. 
-            elif courier_menu_choice == 2:
-                create_new = input('What is the couriers name? ')
+            elif product_menu_choice == 2:
+                create_new = codetest.PRODUCT_making_dic()
                 codetest.add(create_new, z)
                 
             #This updates the product list 
-            elif courier_menu_choice == 3:
-                codetest.COURIER_printing(z)
+            elif product_menu_choice == 3:
+                codetest.printing(x, y, z)
                 choice = int(input('Which number would you like to choose'))
-                update = input('What would you like to change the name to.')
-                codetest.COURIER_update(choice, update, z)
-                codetest.COURIER_printing(z)
+                select = input(f'Would you like to change the {x} or the {y}')
+                update = input('What would you like to change it to.')
+                codetest.update(choice, select, update, z)
+                codetest.printing(x, y, z)
 
             #This will delete something from the list using the index number.
-            elif courier_menu_choice == 4:
-                codetest.COURIER_printing(z)
+            elif product_menu_choice == 4:
+                codetest.printing(x, y, z)
                 codetest.delete(z)
-                codetest.COURIER_printing(z)
+                codetest.printing(x, y, z)

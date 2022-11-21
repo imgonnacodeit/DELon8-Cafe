@@ -126,7 +126,7 @@ def test_PRODUCT_print_happy_case(capsys):
     x = 'name'
     y = 'price'
     z = [{'name': 'apple', 'price': 0.65}]
-    actual = codetest.PRODUCT_printing(x, y, z)
+    actual = codetest.printing(x, y, z)
     stdout, stderr = capsys.readouterr()
     assert stdout == expected
 
@@ -139,7 +139,7 @@ def test_update_happy_name():
     c = 'cake'
     d = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
     expected = [{'name': 'apple', 'price': 0.65}, {'name': 'cake', 'price': 2.54}]
-    actual = codetest.update(a, b, c, d)
+    actual = codetest.PRODUCT_update(a, b, c, d)
     assert expected == actual
 
 #TEST TO DELETE PRODUCTS
@@ -173,28 +173,3 @@ for the input on the menu'''
 #update a courier- used the universal code.
 #delete a courier - used the previous weeks 
 
-#*************************************************************COURIERS********************************************************************************
-#PRINTING HAPPY CASE
-def test_COURIER_print_happy_case(capsys):
-    expected = '0: john\n'
-    z = ['john']
-    actual = codetest.COURIER_printing(z)
-    stdout, stderr = capsys.readouterr()
-    assert stdout == expected
-
-#UPDATING THE COURIER MENU
-def test_COURIER_update_happy_case():
-    expected = ['smithy']
-    x = 0
-    y = 'smithy'
-    z = ['john']
-    actual = codetest.COURIER_update(x, y, z)
-    assert expected == actual
-
-
-
-
-
-
-#***********************************************************PERSISTING DATA**************************************************************************
-'''I should persist the CSV data straight away'''
