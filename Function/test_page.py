@@ -24,29 +24,32 @@ for the input on the menu'''
 #update a product - DONE
 #delete a product - DONE
 
+
+#*********************************************************PRODUCTS************************************************************************************
+
 # TESTS CREATE NEW
 #***********************************************
 # Checking if my input patch works in the pytest.
 @patch('builtins.input')
-def test_createNew_happy(mock_input):
+def test_PRODUCT_create_new_happy(mock_input):
     mock_input.return_value = 'fanta'
-    result = codetest.createNew()
+    result = codetest.PRODUCT_create_new()
     assert(result == 'fanta')
     assert mock_input.call_count == 1
 
 # Checking the patch works with capital letters. 
 @patch('builtins.input')
-def test_createNew_happy_caps(mock_input):
+def test_PRODUCT_create_new_happy_caps(mock_input):
     mock_input.return_value = 'ceREAl'
-    result = codetest.createNew()
+    result = codetest.PRODUCT_create_new()
     assert(result == 'cereal')
     assert mock_input.call_count == 1
 
 #Making sure that the inputs are in a string format. 
 @patch('builtins.input')
-def test_createNew_string(mock_input):
+def test_PRODUCT_create_new_string(mock_input):
     mock_input.return_value = 'cOke'
-    result = codetest.createNew()
+    result = codetest.PRODUCT_create_new()
     assert (isinstance(result, str))
     assert mock_input.call_count == 1
 
@@ -108,8 +111,9 @@ def test_createPrice_unhappy_type_exception(mock_input, capsys):
 #*******************************************
 def test_PRODUCT_add_happy_case():
     expected = [{'name': 'apple', 'price': 0.65}]
+    z = []
     diction = {'name': 'apple', 'price': 0.65}
-    actual = codetest.PRODUCT_add(diction)
+    actual = codetest.add(diction, z)
     assert actual == expected
 
 
@@ -122,7 +126,7 @@ def test_PRODUCT_print_happy_case(capsys):
     x = 'name'
     y = 'price'
     z = [{'name': 'apple', 'price': 0.65}]
-    actual = codetest.PRODUCT_print(x, y, z)
+    actual = codetest.PRODUCT_printing(x, y, z)
     stdout, stderr = capsys.readouterr()
     assert stdout == expected
 
@@ -135,7 +139,7 @@ def test_update_happy_name():
     c = 'cake'
     d = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
     expected = [{'name': 'apple', 'price': 0.65}, {'name': 'cake', 'price': 2.54}]
-    actual = codetest.PRODUCT_update(a, b, c, d)
+    actual = codetest.update(a, b, c, d)
     assert expected == actual
 
 #TEST TO DELETE PRODUCTS
@@ -145,7 +149,7 @@ def test_update_happy_name():
 def test_PRODUCT_delete_happy(mock_input, capsys):
     mock_input.return_value = 0
     list = [{'name': 'apple', 'price': 0.65}, {'name': 'berries', 'price': 1.05}]
-    actual = codetest.PRODUCT_delete(list)
+    actual = codetest.delete(list)
     result = [{'name': 'berries', 'price': 1.05}]
     assert actual == result
 
@@ -154,6 +158,43 @@ def test_PRODUCT_delete_happy(mock_input, capsys):
 def test_PRODUCT_delete_unhappy_string(mock_input, capsys):
     mock_input.return_value = 'between'
     list = [{'name': 'apple', 'price': 0.65}, {'name': 'berries', 'price': 1.05}]
-    codetest.PRODUCT_delete(list)
+    codetest.delete(list)
     stdout, stderr = capsys.readouterr()
     assert stdout == 'You did not enter a correct value\n'
+
+
+#WEEK 2: REQUIRED TESTS
+'''I will still need to add restraints in the code for the menu
+and other things such as only two decimal places for the money and the restains 
+for the input on the menu'''
+#create a courier - used the universal code
+#add courier to list - used the universal code
+#view all couriers - DONE
+#update a courier- used the universal code.
+#delete a courier - used the previous weeks 
+
+#*************************************************************COURIERS********************************************************************************
+#PRINTING HAPPY CASE
+def test_COURIER_print_happy_case(capsys):
+    expected = '0: john\n'
+    z = ['john']
+    actual = codetest.COURIER_printing(z)
+    stdout, stderr = capsys.readouterr()
+    assert stdout == expected
+
+#UPDATING THE COURIER MENU
+def test_COURIER_update_happy_case():
+    expected = ['smithy']
+    x = 0
+    y = 'smithy'
+    z = ['john']
+    actual = codetest.COURIER_update(x, y, z)
+    assert expected == actual
+
+
+
+
+
+
+#***********************************************************PERSISTING DATA**************************************************************************
+'''I should persist the CSV data straight away'''
