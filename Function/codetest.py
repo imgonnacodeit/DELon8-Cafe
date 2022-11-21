@@ -27,8 +27,8 @@ def delete(z):
         print('You did not enter a correct value')
 
 
-def create_new():
-    new_addition = input(f'Please enter the new value that you need.')
+def create_new(x):
+    new_addition = input(f'Please enter the new name {x} that you need.')
     new_addition = new_addition.lower()
     if new_addition != '':
         return new_addition
@@ -44,19 +44,19 @@ def PRODUCT_createPrice():
     except:
         print('This entry is not valid please start again')
 
-def PRODUCT_making_dic():
-    diction = {'name': create_new(), 'price': PRODUCT_createPrice()}
+def PRODUCT_making_dic(x):
+    diction = {'name': create_new(x), 'price': PRODUCT_createPrice()}
     return diction
 
 #COURIERS ONLY MENU 
 def COURIER_create_Phonenumber():
-    new_phonenumber = input('What is the price of the item?: ')
+    new_phonenumber = input('What is the phonenumber of the person?: ')
     try:
         int(new_phonenumber)
         return new_phonenumber
     except:
         print('This entry is not valid please start again')
 
-def COURIER_making_dic():
-    diction = {'name': create_new(), 'price': COURIER_create_Phonenumber()}
+def COURIER_making_dic(x):
+    diction = {'name': create_new(x), 'phone number': COURIER_create_Phonenumber()}
     return diction

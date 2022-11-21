@@ -33,7 +33,8 @@ for the input on the menu'''
 @patch('builtins.input')
 def test_PRODUCT_create_new_happy(mock_input):
     mock_input.return_value = 'fanta'
-    result = codetest.PRODUCT_create_new()
+    x = 'of the item'
+    result = codetest.create_new(x)
     assert(result == 'fanta')
     assert mock_input.call_count == 1
 
@@ -41,7 +42,8 @@ def test_PRODUCT_create_new_happy(mock_input):
 @patch('builtins.input')
 def test_PRODUCT_create_new_happy_caps(mock_input):
     mock_input.return_value = 'ceREAl'
-    result = codetest.PRODUCT_create_new()
+    x = 'of the item'
+    result = codetest.create_new(x)
     assert(result == 'cereal')
     assert mock_input.call_count == 1
 
@@ -49,7 +51,8 @@ def test_PRODUCT_create_new_happy_caps(mock_input):
 @patch('builtins.input')
 def test_PRODUCT_create_new_string(mock_input):
     mock_input.return_value = 'cOke'
-    result = codetest.PRODUCT_create_new()
+    x = 'of the item'
+    result = codetest.create_new(x)
     assert (isinstance(result, str))
     assert mock_input.call_count == 1
 
@@ -139,7 +142,7 @@ def test_update_happy_name():
     c = 'cake'
     d = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
     expected = [{'name': 'apple', 'price': 0.65}, {'name': 'cake', 'price': 2.54}]
-    actual = codetest.PRODUCT_update(a, b, c, d)
+    actual = codetest.update(a, b, c, d)
     assert expected == actual
 
 #TEST TO DELETE PRODUCTS
@@ -169,7 +172,7 @@ and other things such as only two decimal places for the money and the restains
 for the input on the menu'''
 #create a courier - used the universal code
 #add courier to list - used the universal code
-#view all couriers - DONE
+#view all couriers - used unicersal code
 #update a courier- used the universal code.
 #delete a courier - used the previous weeks 
 
