@@ -137,12 +137,9 @@ def test_PRODUCT_print_happy_case(capsys):
 #TEST TO UPDATE PRODUCTS
 #***********************
 def test_update_happy_name():
-    a = 1
-    b = 'name'
-    c = 'cake'
     d = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
     expected = [{'name': 'apple', 'price': 0.65}, {'name': 'cake', 'price': 2.54}]
-    actual = codetest.update(a, b, c, d)
+    actual = codetest.update(d)
     assert expected == actual
 
 #TEST TO DELETE PRODUCTS
@@ -176,3 +173,18 @@ for the input on the menu'''
 #update a courier- used the universal code.
 #delete a courier - used the previous weeks 
 
+#WEEK 3: REQUIRED TESTS
+def test_order_dic_happy_test():
+    customer_name = 'John Appleseed'
+    customer_address = '10 Downing Street'
+    customer_phone = 12345678911
+    result = {'name': 'John Appleseed', 'address': '10 Downing Street', 'phone number': 12345678911, 'status': 'Preparing'}
+    actual = codetest.ORDER_dic(customer_name, customer_address, customer_phone, status = 'Preparing')
+    assert result == actual
+
+def test_order_print_happy_test(capsys):
+    expected = '\nORDER NUMBER: [0]\nCUSTOMER NAME: james\nCUSTOMER ADDRESS: 10 downing street\nCUSTOMER NUMBER: 12345678911\nORDER STATUS: Preparing\n'
+    orderlist = [{'name': 'james', 'address': '10 downing street', 'phone number': 12345678911, 'status': 'Preparing'}, {'name': 'carlton', 'address': '10 downing street', 'phone number': 12345678911, 'status': 'Preparing'}]
+    actual = codetest.ORDER_print(orderlist)
+    stdout, stderr = capsys.readouterr()
+    assert stdout == expected

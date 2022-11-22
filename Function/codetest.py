@@ -1,5 +1,5 @@
 productlist = []
-orders = []
+orderlist = []
 courierlist = []
 
 #ALL MENU
@@ -13,8 +13,18 @@ def add(x, z):
     z.append(x)
     return(z)
 
-def update(w, x, y, z): 
-    z[w][x] = y
+def update(index_value, a, b, x, y, z): 
+    if a == '':
+        pass
+    elif a != '':
+        z[index_value][x]=a
+                    
+    if b=='':
+        pass
+    elif b !='':
+        float(b)
+        z[index_value][y]=b
+    
     return z
 
 def delete(z):
@@ -25,7 +35,6 @@ def delete(z):
         return z
     except:
         print('You did not enter a correct value')
-
 
 def create_new(x):
     new_addition = input(f'Please enter the new name {x} that you need.')
@@ -60,3 +69,13 @@ def COURIER_create_Phonenumber():
 def COURIER_making_dic(x):
     diction = {'name': create_new(x), 'phone number': COURIER_create_Phonenumber()}
     return diction
+
+#ORDERS ONLY MENU
+def ORDER_dic(customer_name, customer_address, customer_phone, status):
+    order_diction = {'name': customer_name, 'address': customer_address, 'phone number': customer_phone, 'status': status}
+    return order_diction
+
+def ORDER_print(z):
+    for order in z:
+        print(f"\nORDER NUMBER: {index}\nCUSTOMER NAME: {order['name']}\nCUSTOMER ADDRESS: {order['address']}\nCUSTOMER NUMBER: {order['phone number']}\nORDER STATUS: {order['status']}")
+        index = index + 1
