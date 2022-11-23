@@ -1,7 +1,7 @@
 import codetest
  
 while True:
-    choice = int(input('\nWELCOME TO THE MAIN MENU\n\n\nMENU\nTo EXIT the program select 0\nTo enter the PRODUCTS MENU select 1\nTo enter the ORDERS MENU select 2\nTo enter the COURIERS MENU select 3\n\nPlease enter selection: '))
+    choice = int(input('\nWELCOME TO THE MAIN MENU\n\n\nMENU\nTo EXIT the program select 0\nTo enter the PRODUCTS MENU select 1\nTo enter the COURIERS MENU select 2\nTo enter the ORDERS MENU select 3\n\nPlease enter selection: '))
     if choice == 1:
         e = 'of the item'
         x = 'name'
@@ -38,8 +38,7 @@ while True:
                 codetest.printing(x, y, z)
                 codetest.delete(z)
                 codetest.printing(x, y, z)
-
-       
+  
     elif choice == 2:
         e = 'of the person'
         x = 'name'
@@ -47,7 +46,7 @@ while True:
         z = codetest.courierlist
         while True:
             #Taking an input for the couriers menu
-            courier_menu_choice = int(input('\nCOURIERS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all couriers\n2. To CREATE a new product\n3. To UPDATE a courier\n4. To DELETE a courier\n\nPlease enter selection: '))
+            courier_menu_choice = int(input('\nCOURIERS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all couriers\n2. To ADD a new courier\n3. To UPDATE a courier\n4. To DELETE a courier\n\nPlease enter selection: '))
 
             #Exit out of the courier menu
             if courier_menu_choice == 0:
@@ -78,51 +77,64 @@ while True:
                 codetest.printing(x, y, z)
 
     elif choice == 3:
-        z = codetest.orderlist
-        status = 'Preparing'
+        cl = codetest.orderlist
+        status = 'Preparing:'
         while True:
-            order_menu_choice = int(input('\nORDERS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all orders\n2. To CREATE a new order\n3. To UPDATE an order\n4. To DELETE an order\n\nPlease enter selection: '))
+            order_menu_choice = int(input('\nORDERS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all orders\n2. To CREATE a new order\n3. To UPDATE an order\n4. To UPDATE an order\n5. To DELETE an order\n\nPlease enter selection: '))
 
+            #This will exit to the main menu
             if order_menu_choice == 0:
                 break
-
+            
+            #This prints the orders made
             if order_menu_choice == 1:
-                codetest.ORDER_print(z)
+                cl = codetest.orderlist
+                codetest.ORDER_print(cl)
 
+            #This creates an order
             if order_menu_choice == 2:
                 customer_name = input('Please enter the customer name. ')
                 customer_address = input('Please enter the customer address. ')
                 customer_phone = int(input('Please enter the phone number of the customer. '))
 
                 print_product = codetest.printing(x = 'name', y = 'price', z = codetest.productlist)
-                ordering_products = []
-                
-                
+                ordering_products = []                
                 myseparator = ', '
-                while True:
-                    index_product = int(input('Please select your item number that you would like to add to your list. '))
-                    if index_product == '':
-                        break
+                index_product = input('Please select your item number that you would like to add to your list. ')
+                while index_product != '':
                     ordering_products.append(index_product)
-                    print(ordering_products)
-                
-                x = myseparator.join(ordering_products)
-                courier_print = codetest.printing(x = 'name', y = 'phone number', z = codetest.courierlist)
-
-                new_order = codetest.ORDER_dic(customer_name, customer_address, customer_phone, status)
-                codetest.add(new_order, z)
-
-            if order_menu_choice == 3:
-                codetest.ORDER_print(z)
-                order_index_value = int(input('Please enter the number for the order that you would like to modify'))
-
+                    index_product = input('Please select your item number that you would like to add to your list. ')
+                    
+                product_selection = myseparator.join(ordering_products)
             
+                courier_print = codetest.printing(x = 'name', y = 'phone number', z = codetest.courierlist)
+                courier_selection = input('Which courier would you like to have')
+
+                new_order = codetest.ORDER_dic(customer_name, customer_address, customer_phone, courier_selection, status, product_selection )
+                
+                codetest.add(new_order, z = codetest.orderlist)
+
+            #This updates the order status
+            if order_menu_choice == 3:
+                cl = codetest.orderlist
+                codetest.ORDER_print(cl)
+                order_index_value = int(input('Please enter the number for the order that you would like to modify'))
+                for i,v in z[order_index_value]:
+                    print (i,v)
+            
+            #This updates an order
             if order_menu_choice == 4:
-                codetest.ORDER_print(z)
+                cl = codetest.orderlist
+                codetest.ORDER_print(cl)
+                index_value = int(input('Please enter the number of the courier that you would like to update: '))
+                a = input('Please enter the updated name for the customer name. ')
+                b = input('Please enter the updated address. ')
+                c = input('Please enter the updated courier selection')
+                d = input('Please enter the updated items')
+                codetest.ORDER_update(index_value, a, b, c, d, cl)
+                codetest.ORDER_print(cl)
 
-
+            #This deletes an order
             if order_menu_choice == 5:
-                codetest.delete(z)
-
-            if order_menu_choice == 6:
-                pass
+                cl = codetest.orderlist
+                codetest.delete(cl)

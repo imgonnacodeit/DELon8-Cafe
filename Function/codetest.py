@@ -22,9 +22,7 @@ def update(index_value, a, b, x, y, z):
     if b=='':
         pass
     elif b !='':
-        float(b)
         z[index_value][y]=b
-    
     return z
 
 def delete(z):
@@ -71,11 +69,35 @@ def COURIER_making_dic(x):
     return diction
 
 #ORDERS ONLY MENU
-def ORDER_dic(customer_name, customer_address, customer_phone, status):
-    order_diction = {'name': customer_name, 'address': customer_address, 'phone number': customer_phone, 'status': status}
+def ORDER_dic(customer_name, customer_address, customer_phone, courier_selection, status, product_selection):
+    order_diction = {'name': customer_name, 'address': customer_address, 'phone number': customer_phone, 'courier selection': courier_selection,  'status': status, 'items': product_selection }
     return order_diction
 
-def ORDER_print(z):
-    for order in z:
-        print(f"\nORDER NUMBER: {index}\nCUSTOMER NAME: {order['name']}\nCUSTOMER ADDRESS: {order['address']}\nCUSTOMER NUMBER: {order['phone number']}\nORDER STATUS: {order['status']}")
+def ORDER_print(cl):
+    index = 0
+    for order in cl:
+        print(f"\n[{index}]:, {order['name']}, {order['address']}, {order['courier selection']}, {order['status']}, {order['items']}")
         index = index + 1
+
+def ORDER_update(index_value, a, b, c, d, cl): 
+    if a == '':
+        pass
+    elif a != '':
+        cl[index_value]['name']=a
+                    
+    if b=='':
+        pass
+    elif b !='':
+        cl[index_value]['address']=b
+
+    if c == '':
+        pass
+    elif c != '':
+        cl[index_value]['courier selection']=c
+
+    if d == '':
+        pass
+    elif d != '':
+        cl[index_value]['items']=d
+
+    return cl
