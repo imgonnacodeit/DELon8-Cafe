@@ -1,6 +1,6 @@
 productlist = []
 orderlist = []
-courierlist = []
+courierlist = [] 
 
 import csv
 
@@ -10,7 +10,6 @@ def opening_products(t):
         csv_file = csv.DictReader(file, delimiter=',')
         for row in csv_file:
             t.append(row)
-
 
 def opening_couriers(r):
     with open('couriers.csv', 'r') as file:
@@ -72,7 +71,11 @@ def update(index_value, a, b, x, y, z):
     if b=='':
         pass
     elif b !='':
-        z[index_value][y]=b
+        try:
+            float(b)
+            z[index_value][y]=b
+        except:
+            print('The value that you have entred is not a number please enter a numerical value. Please start again.')
     return z
 
 def delete(z):
@@ -82,7 +85,7 @@ def delete(z):
         del z[item_finder]
         return z
     except:
-        print('You did not enter a correct value')
+        print('You did not enter a correct value. Please start again.')
 
 def create_new(x):
     new_addition = input(f'Please enter the new name {x} that you need.')
@@ -97,6 +100,7 @@ def PRODUCT_createPrice():
     new_price = input('What is the price of the item?: ')
     try:
         float(new_price)
+        price = ()
         return new_price
     except:
         print('This entry is not valid please start again')
@@ -152,3 +156,24 @@ def ORDER_update(index_value, a, b, c, d, cl):
         cl[index_value]['items']=d
 
     return cl
+
+def ORDER_status_update(selection, ol):
+    order_status = ['Preparing', 'Ready', 'Out for delivery']
+    choice = int(input('Please select which status you would like to update the order to.\n[0] Preparing\n[1] Ready\n[2] Out for delivery\n'))
+    if choice != '':
+        ol[selection]['status'] = order_status[choice]
+
+def ORDER_status_print_list(ol):
+    index = 0
+    for i in ol:
+        print(f"Order [{index}] status is {i['status']}")
+        index += 1
+
+def ordering_ORDERS(change_order, ol):
+    if change_order == 0:
+        done = (sorted(ol, key=lambda q: q['status']))
+        return done
+    
+    elif change_order == 1:
+        done = (sorted(ol, key=lambda q: q['courier selection']))
+        return done

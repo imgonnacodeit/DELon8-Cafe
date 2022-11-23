@@ -14,10 +14,6 @@ import pytest
 #Act - Call the function with the parameters 
 #Assert - Write an assertion so that it can fail then pass.
 
-#WEEK 1: REQUIRED TESTS
-'''I will still need to add restraints in the code for the menu
-and other things such as only two decimal places for the money and the restains 
-for the input on the menu'''
 #create a product - DONE
 #add product to list - DONE
 #view all products - DONE
@@ -57,7 +53,6 @@ def test_PRODUCT_create_new_string(mock_input):
     assert mock_input.call_count == 1
 
 
-
 # CREATE PRICE
 #*********************************************
 # Checking to see if function would take an integer 
@@ -92,7 +87,7 @@ def test_createPrice_happy_type(mock_input):
 
 #Should not accept a string and raise and error. 
 #This test passed until I coded the exception. 
-@pytest.mark.skip(reason ='This has been handled by the exception below')
+@pytest.mark.skip(reason ='This has been handled by another test so it has been skipped intentionally')
 @patch('builtins.input')
 def test_createPrice_unhappy_type(mock_input):
     with pytest.raises(ValueError):
@@ -125,10 +120,10 @@ def test_PRODUCT_add_happy_case():
 #The test shows that the products inserted are printed to the console 
 #*******************************************
 def test_PRODUCT_print_happy_case(capsys):
-    expected = '0: name apple price 0.65\n'
+    expected = '0: name apple, price 0.65\n'
     x = 'name'
     y = 'price'
-    z = [{'name': 'apple', 'price': 0.65}]
+    z = [{'name': 'apple','price': 0.65}]
     actual = codetest.printing(x, y, z)
     stdout, stderr = capsys.readouterr()
     assert stdout == expected
@@ -137,12 +132,63 @@ def test_PRODUCT_print_happy_case(capsys):
 #TEST TO UPDATE PRODUCTS
 #***********************
 def test_update_happy_name():
-    d = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
-    expected = [{'name': 'apple', 'price': 0.65}, {'name': 'cake', 'price': 2.54}]
-    actual = codetest.update(d)
+    index_value = 1
+    a = 'oats'
+    b = ''
+    x = 'name'
+    y = 'price'
+    z = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
+    expected = [{'name': 'apple', 'price': 0.65}, {'name': 'oats', 'price': 2.54}]
+    actual = codetest.update(index_value, a, b, x, y, z)
     assert expected == actual
 
-#TEST TO DELETE PRODUCTS
+def test_update_happy_price():
+    index_value = 1
+    a = ''
+    b = 0.99
+    x = 'name'
+    y = 'price'
+    z = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
+    expected = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 0.99}]
+    actual = codetest.update(index_value, a, b, x, y, z)
+    assert expected == actual
+
+def test_update_edge_price_nothing():
+    index_value = 1
+    a = ''
+    b = ''
+    x = 'name'
+    y = 'price'
+    z = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
+    expected = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
+    actual = codetest.update(index_value, a, b, x, y, z)
+    assert expected == actual
+
+def test_update_edge_both_changed_happy():
+    index_value = 1
+    a = 'cherry'
+    b = 0.74
+    x = 'name'
+    y = 'price'
+    z = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
+    expected = [{'name': 'apple', 'price': 0.65}, {'name': 'cherry', 'price': 0.74}]
+    actual = codetest.update(index_value, a, b, x, y, z)
+    assert expected == actual
+
+def test_update_edge_string_in_price_unhappy(capsys):
+    index_value = 1
+    a = ''
+    b = 'fancy'
+    x = 'name'
+    y = 'price'
+    z = [{'name': 'apple', 'price': 0.65}, {'name': 'juice', 'price': 2.54}]
+    expected = 'The value that you have entred is not a number please enter a numerical value. Please start again.\n'
+    actual = codetest.update(index_value, a, b, x, y, z)
+    stdout, stderr = capsys.readouterr()
+    assert stdout == expected
+
+
+#TEST TO DELETE 
 #**************************
 #Delete the item
 @patch('builtins.input')
@@ -160,31 +206,7 @@ def test_PRODUCT_delete_unhappy_string(mock_input, capsys):
     list = [{'name': 'apple', 'price': 0.65}, {'name': 'berries', 'price': 1.05}]
     codetest.delete(list)
     stdout, stderr = capsys.readouterr()
-    assert stdout == 'You did not enter a correct value\n'
+    assert stdout == 'You did not enter a correct value. Please start again.\n'
 
-
-#WEEK 2: REQUIRED TESTS
-'''I will still need to add restraints in the code for the menu
-and other things such as only two decimal places for the money and the restains 
-for the input on the menu'''
-#create a courier - used the universal code
-#add courier to list - used the universal code
-#view all couriers - used unicersal code
-#update a courier- used the universal code.
-#delete a courier - used the previous weeks 
-
-#WEEK 3: REQUIRED TESTS
-def test_order_dic_happy_test():
-    customer_name = 'John Appleseed'
-    customer_address = '10 Downing Street'
-    customer_phone = 12345678911
-    result = {'name': 'John Appleseed', 'address': '10 Downing Street', 'phone number': 12345678911, 'status': 'Preparing'}
-    actual = codetest.ORDER_dic(customer_name, customer_address, customer_phone, status = 'Preparing')
-    assert result == actual
-
-def test_order_print_happy_test(capsys):
-    expected = '\nORDER NUMBER: [0]\nCUSTOMER NAME: james\nCUSTOMER ADDRESS: 10 downing street\nCUSTOMER NUMBER: 12345678911\nORDER STATUS: Preparing\n'
-    orderlist = [{'name': 'james', 'address': '10 downing street', 'phone number': 12345678911, 'status': 'Preparing'}, {'name': 'carlton', 'address': '10 downing street', 'phone number': 12345678911, 'status': 'Preparing'}]
-    actual = codetest.ORDER_print(orderlist)
-    stdout, stderr = capsys.readouterr()
-    assert stdout == expected
+#TEST ORDERS MENU
+#*************************

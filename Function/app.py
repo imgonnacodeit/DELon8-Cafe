@@ -11,12 +11,20 @@ codetest.opening_products(pl)
 codetest.opening_couriers(cl)
 codetest.opening_orders(ol)
 
+
+
 while True:
-    choice = int(input('\nWELCOME TO THE MAIN MENU\n\n\nMENU\nTo EXIT the program select 0\nTo enter the PRODUCTS MENU select 1\nTo enter the COURIERS MENU select 2\nTo enter the ORDERS MENU select 3\n\nPlease enter selection: '))
+    try:
+        choice = int(input('\nWELCOME TO THE MAIN MENU\n\n\nMENU\nTo EXIT the program select 0\nTo enter the PRODUCTS MENU select 1\nTo enter the COURIERS MENU select 2\nTo enter the ORDERS MENU select 3\n\nPlease enter selection: '))
+    except:
+        print('You did not insert the correct input. Exiting program')
+        break
+
+   
     if choice == 0:
         break
 
-    if choice == 1:
+    elif choice == 1:
         e = 'of the item'
         z = codetest.productlist
         while True:
@@ -42,7 +50,7 @@ while True:
                 codetest.printing(x, p, pl)
                 index_value = int(input('Please enter the number of the product that you would like to update: '))
                 a = input('Please enter the new value for the name')
-                b = (input('Please enter the new value for the price'))
+                b = input('Please enter the new value for the price')
                 codetest.update(index_value, a, b, x, p, pl)
                 codetest.printing(x, p, pl)
 
@@ -91,7 +99,7 @@ while True:
         ol = codetest.orderlist
         status = 'Preparing:'
         while True:
-            order_menu_choice = int(input('\nORDERS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all orders\n2. To CREATE a new order\n3. To UPDATE an order\n4. To UPDATE an order\n5. To DELETE an order\n\nPlease enter selection: '))
+            order_menu_choice = int(input('\nORDERS MENU\n0. Return to the MAIN MENU.\n1. To PRINT all orders\n2. To CREATE a new order\n3. To UPDATE an order STATUS\n4. To UPDATE an order\n5. To DELETE an order\n6. To list orders by STATUS or COURIER\n\nPlease enter selection: '))
 
             #This will exit to the main menu
             if order_menu_choice == 0:
@@ -101,6 +109,7 @@ while True:
             #This prints the orders made
             if order_menu_choice == 1:
                 codetest.ORDER_print(ol)
+
 
             #This creates an order
             if order_menu_choice == 2:
@@ -127,7 +136,10 @@ while True:
 
             #This updates the order status
             if order_menu_choice == 3:
-                cl = codetest.orderlist
+                codetest.ORDER_print(ol)
+                selection = int(input('Please select which order that you would like to update. '))
+                codetest.ORDER_status_print_list(ol)
+                codetest.ORDER_status_update(selection, ol)
                 codetest.ORDER_print(ol)
             
             #This updates an order
@@ -144,5 +156,10 @@ while True:
 
             #This deletes an order
             if order_menu_choice == 5:
-                cl = codetest.orderlist
                 codetest.delete(ol)
+
+            #This changes the order into the desired list.
+            if order_menu_choice == 6:
+                change_order = int(input('Would you like to rearrange by [0]status or [1]courier. '))
+                shuffle = codetest.ordering_ORDERS(change_order, ol)
+                codetest.ORDER_print(shuffle)
