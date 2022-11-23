@@ -1,5 +1,5 @@
 import codetest
- 
+#codetest.opening()
 while True:
     choice = int(input('\nWELCOME TO THE MAIN MENU\n\n\nMENU\nTo EXIT the program select 0\nTo enter the PRODUCTS MENU select 1\nTo enter the COURIERS MENU select 2\nTo enter the ORDERS MENU select 3\n\nPlease enter selection: '))
     if choice == 1:
@@ -13,6 +13,7 @@ while True:
 
             #Exit out of the product menu
             if product_menu_choice == 0:
+                codetest.writer_product(z)
                 break
 
             #Takes everyproduct and prints it to a new line.
@@ -50,6 +51,7 @@ while True:
 
             #Exit out of the courier menu
             if courier_menu_choice == 0:
+                codetest.writer_courier(z)
                 break
 
             #Takes everyproduct and prints it to a new line.
@@ -84,6 +86,7 @@ while True:
 
             #This will exit to the main menu
             if order_menu_choice == 0:
+                codetest.writer_order(cl)
                 break
             
             #This prints the orders made
@@ -118,9 +121,6 @@ while True:
             if order_menu_choice == 3:
                 cl = codetest.orderlist
                 codetest.ORDER_print(cl)
-                order_index_value = int(input('Please enter the number for the order that you would like to modify'))
-                for i,v in z[order_index_value]:
-                    print (i,v)
             
             #This updates an order
             if order_menu_choice == 4:

@@ -2,6 +2,41 @@ productlist = []
 orderlist = []
 courierlist = []
 
+import csv
+
+def opening():
+    with open('products.csv', 'r') as file:
+        reader = csv.DictReader(file, delimiter=',')
+    for row in reader:
+        productlist.append
+
+def writer_product(z):
+    with open('products.csv', mode='w') as file:
+        fieldnames = ['name', 'price']
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for i in z:
+            writer.writerow(i)
+
+def writer_courier(z):
+    with open('couriers.csv', mode='w') as file:
+        fieldnames = ['name', 'phone number']
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for i in z:
+            writer.writerow(i)
+
+def writer_order(cl):
+    with open('orders.csv', mode='w') as file:
+        fieldnames = ['name', 'address', 'phone number', 'courier', 'status', 'items']
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for i in cl:
+            writer.writerow(i)
+
 #ALL MENU
 def printing(x, y, z):
     index = 0
