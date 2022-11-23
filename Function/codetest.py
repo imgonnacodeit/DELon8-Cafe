@@ -4,12 +4,27 @@ courierlist = []
 
 import csv
 
-def opening():
+#Reading from a file
+def opening_products(t):
     with open('products.csv', 'r') as file:
-        reader = csv.DictReader(file, delimiter=',')
-    for row in reader:
-        productlist.append
+        csv_file = csv.DictReader(file, delimiter=',')
+        for row in csv_file:
+            t.append(row)
 
+
+def opening_couriers(r):
+    with open('couriers.csv', 'r') as file:
+        csv_file = csv.DictReader(file, delimiter=',')
+        for row in csv_file:
+            r.append(row)
+
+def opening_orders(s):
+   with open('orders.csv', 'r') as file:
+        csv_file = csv.DictReader(file, delimiter=',')
+        for row in csv_file:
+            s.append(row)
+
+#Writing to file 
 def writer_product(z):
     with open('products.csv', mode='w') as file:
         fieldnames = ['name', 'price']
@@ -30,7 +45,7 @@ def writer_courier(z):
 
 def writer_order(cl):
     with open('orders.csv', mode='w') as file:
-        fieldnames = ['name', 'address', 'phone number', 'courier', 'status', 'items']
+        fieldnames = ['name', 'address', 'phone number', 'courier selection', 'status', 'items']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
 
         writer.writeheader()
@@ -41,7 +56,7 @@ def writer_order(cl):
 def printing(x, y, z):
     index = 0
     for i in z:
-        print(f'{index}: {x} {i[x]} {y} {i[y]}')
+        print(f'{index}: {x} {i[x]}, {y} {i[y]}')
         index = index + 1
 
 def add(x, z):
@@ -103,6 +118,7 @@ def COURIER_making_dic(x):
     diction = {'name': create_new(x), 'phone number': COURIER_create_Phonenumber()}
     return diction
 
+
 #ORDERS ONLY MENU
 def ORDER_dic(customer_name, customer_address, customer_phone, courier_selection, status, product_selection):
     order_diction = {'name': customer_name, 'address': customer_address, 'phone number': customer_phone, 'courier selection': courier_selection,  'status': status, 'items': product_selection }
@@ -111,7 +127,7 @@ def ORDER_dic(customer_name, customer_address, customer_phone, courier_selection
 def ORDER_print(cl):
     index = 0
     for order in cl:
-        print(f"\n[{index}]:, {order['name']}, {order['address']}, {order['courier selection']}, {order['status']}, {order['items']}")
+        print(f"\n[{index}]: {order['name']}, {order['address']}, {order['courier selection']}, {order['status']} {order['items']}")
         index = index + 1
 
 def ORDER_update(index_value, a, b, c, d, cl): 
